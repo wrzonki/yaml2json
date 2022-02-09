@@ -6,7 +6,8 @@
   });
 import './lib/style.scss';
   let editor1;
-  let yaml = `v1:
+  let yaml = `
+v1:
 - id: 'priceField'
   type: number
   disabled: true
@@ -21,14 +22,15 @@ import './lib/style.scss';
   value: 'PLN'
 v2:
 - id: 'priceField'
-  type: text
-  disabled: false
+  type: number
+  disabled: true
+  value: 0
 - id: 'currency'
   type: text
   disabled: false
   value: 'PLN'
 - id: 'passwd'
-  type: password
+  type: text
   disabled: false
   value: 'PLN'
   `;
