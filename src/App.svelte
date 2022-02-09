@@ -68,7 +68,7 @@ v2:
 <style lang="scss">
   #wrapper {
     width: 100%;
-    height: 50vh;
+    height: 60vh;
     position: relative;
     display: flex;
   }
