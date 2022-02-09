@@ -1,35 +1,47 @@
 <script>
-  import { debug } from 'svelte/internal';
+  import { onMount } from 'svelte';
+
+  onMount(async () => {
+    onChange();
+  });
 import './lib/style.scss';
   let editor1;
   let yaml = `v1:
-- id: 'nominalValue'
+- id: 'priceField'
   type: number
   disabled: true
   value: 0
-- id: 'collateralCurrency'
+- id: 'currency'
+  type: text
+  disabled: false
+  value: 'PLN'
+- id: 'passwd'
   type: text
   disabled: false
   value: 'PLN'
 v2:
-- id: 'nominalValue'
+- id: 'priceField'
   type: text
   disabled: false
-- id: 'collateralCurrency'
+- id: 'currency'
   type: text
+  disabled: false
+  value: 'PLN'
+- id: 'passwd'
+  type: password
   disabled: false
   value: 'PLN'
   `;
   let modelJson;
-  $: console.log(modelJson);
   let json = '';
 
 
-  let onChange = (e) => {
+  let onChange = () => {
     try {
       yaml = editor1.value;
       // @ts-ignore
       modelJson = jsyaml.load(yaml);
+      console.log(modelJson);
       json = JSON.stringify(modelJson, null, 2);
     } catch (error) {
       console.log('yaml err');
@@ -42,23 +54,25 @@ v2:
   <textarea class="editor prism-live language-javascript" disabled>{json}</textarea>
 </div>
 
-{@debug modelJson}
-{#if modelJson && modelJson.v1}
-  {#each modelJson.v1 as input}
-    <input id={input.id} type={input.type} disabled={input.disabled}>
+{#if !!modelJson && Object.keys(modelJson).length}
+  {#each Object.entries(modelJson) as [version, arrayOfInputs]}
+    <p>{version}</p>
+    {#each arrayOfInputs as input}
+      <input id={input.id} type={input.type} disabled={input.disabled} value={input.value}><br/>
+    {/each}
   {/each}
 {/if}
 
 <style lang="scss">
   #wrapper {
     width: 100%;
-    height: 100vh;
+    height: 50vh;
     position: relative;
     display: flex;
   }
   .editor {
-    height: 50%;
-    width: 50%;
+    width: 100%;
+    height: 100%;
     resize: none;
   }
 </style>
