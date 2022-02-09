@@ -17,14 +17,14 @@ v1:
   disabled: false
   value: 'PLN'
 - id: 'passwd'
-  type: text
+  type: password
   disabled: false
-  value: 'PLN'
+  value: 'password'
 v2:
 - id: 'priceField'
-  type: number
-  disabled: true
-  value: 0
+  type: text
+  disabled: false
+  value: 20
 - id: 'currency'
   type: text
   disabled: false
@@ -32,7 +32,7 @@ v2:
 - id: 'passwd'
   type: text
   disabled: false
-  value: 'PLN'
+  value: 'password'
   `;
   let modelJson;
   let json = '';
